@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blog Post</title>
+    <link rel="stylesheet" href="writeup.css">
+</head>
+<body>
+    <div class="container">
+        <div class="toppane">
+            <h1>TRANSFORMATIVE LIVING &nbsp;// &nbsp;<span style="font-weight: lighter"> experiments for piano</span></h1>
+            <p1><span style="font-weight: lighter"><em>triadic transformations & Conway's game of life</em></span></p1>
+
+        </div>
+        <div class="spacer">
+            <a href="index.html">Back</a>
+        </div>
+    </div>
+    <div class="body">
+
+        <iframe width="100%" height="600px" src="https://www.youtube.com/embed/PF2xlYWabAY" title="YouTube video player"
+                frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+        <br />
+        <br />
+        This project uses Conway’s game of life and an extended theory of
+        <a href="UTT-paper.pdf" target="_blank" rel="noopener noreferrer">uniform triadic transformations</a>
+        to deterministically generate compositions for solo piano. It uses the <a href="http://lilypond.org/" target="_blank" rel="noopener noreferrer">LilyPond</a>
+        text-based music engraver to create traditional western sheet music for each composition.<br />
+        <br />
+        Click <a href="Transformative Living No. 139G135&25.pdf" target="_blank" rel="noopener noreferrer">here</a> to see the sheet music from the video above.<br />
+        Since the composition is deterministic, you can replicate it exactly by choosing the same initial conditions. <br />
+        <br />
+        <br />
+        <span style="font-weight:bolder; font-size:20px">PREAMBLE: TRANSFORMATION THEORY</span> <br />
+        <br />
+        The chord transformations in this project are an extension of UTTs onto seventh chords. While there are many ways
+        to think about seventh chords, I decided to treat them as a combination of a triad and a seventh. <br />
+        <br />
+        <i>
+            DISCLAIMER: I'm to give you a very quick and somewhat narrow explanation of canonical western music theory,
+            based on what I know and what I think is important, so do take this with a grain of salt.
+        </i><br />
+        <br />
+        <span style="font-weight:bolder; font-size:15px">CHORDS</span> <br />
+        <br />
+        Triads are made up of a root note, a third, and a fifth. The most basic triad is the major triad,
+        which in the key of C looks and sounds like this:<br />
+        <br />
+        <img src="images/Cmajor.jpg" class="chord-diagram">
+        <audio controls>
+            <source src="audio/Cmajor.wav" type="audio/wav">
+        </audio>
+        <br />
+        <br />
+        You might also know about minor triads, which in the key of C looks and sounds like this: <br />
+        <br />
+        <img src="images/Cminor.jpg" class="chord-diagram">
+        <audio controls>
+            <source src="audio/Cminor.wav" type="audio/wav">
+        </audio>
+        <br />
+        <br />
+        You can see that the only difference from a major triad is the middle note, the third, which in a
+        minor triad is a half-step lower.<br />
+        <br />
+        Another “flavor” of triad is called a diminished triad, which in the key of C looks and sounds like this:<br />
+        <br />
+        <img src="images/Cdim.jpg" class="chord-diagram">
+        <audio controls>
+            <source src="audio/Cdim.wav" type="audio/wav">
+        </audio>
+        <br />
+        <br />
+        A diminished triad has both its middle note and top note a half-step lower than in the major triad.<br />
+        <br />
+        Sevenths also come in major, minor, and diminished flavors. In the key of C, these are the major, minor,
+        and diminished seventh intervals:<br />
+        <br />
+        <img src="images/Cmajor7th.jpg" class="chord-diagram">
+        <audio controls>
+            <source src="audio/Cmajor7th.wav" type="audio/wav">
+        </audio><br />
+        <img src="images/Cminor7th.jpg" class="chord-diagram">
+        <audio controls>
+            <source src="audio/Cminor7th.wav" type="audio/wav">
+        </audio><br />
+        <img src="images/Cdim7th.jpg" class="chord-diagram">
+        <audio controls>
+            <source src="audio/Cdim7th.wav" type="audio/wav">
+        </audio><br />
+        <br />
+        When we combine triads with sevenths, we get seventh chords. Each flavor combination has its own name and unique sound.
+        In the key of C, these are all the possible seventh chords using our three flavors:<br />
+        <br />
+        <img src="images/CM7.jpg" class="chord-diagram">
+        <audio controls>
+            <source src="audio/CM7.wav" type="audio/wav">
+        </audio><br />
+        <img src="images/CD7.jpg" class="chord-diagram">
+        <audio controls>
+            <source src="audio/CD7.wav" type="audio/wav">
+        </audio><br />
+        <img src="images/CM6.jpg" class="chord-diagram">
+        <audio controls>
+            <source src="audio/CM6.wav" type="audio/wav">
+        </audio><br />
+        <br />
+        <img src="images/CmM7.jpg" class="chord-diagram">
+        <audio controls>
+            <source src="audio/CmM7.wav" type="audio/wav">
+        </audio><br />
+        <img src="images/Cmin7.jpg" class="chord-diagram">
+        <audio controls>
+            <source src="audio/Cmin7.wav" type="audio/wav">
+        </audio><br />
+        <img src="images/Cmin6.jpg" class="chord-diagram">
+        <audio controls>
+            <source src="audio/Cmin6.wav" type="audio/wav">
+        </audio><br />
+        <br />
+        <img src="images/CdimM7.jpg" class="chord-diagram">
+        <audio controls>
+            <source src="audio/CdimM7.wav" type="audio/wav">
+        </audio><br />
+        <img src="images/Chdim7.jpg" class="chord-diagram">
+        <audio controls>
+            <source src="audio/Chdim7.wav" type="audio/wav">
+        </audio><br />
+        <img src="images/Cdim7.jpg" class="chord-diagram">
+        <audio controls>
+            <source src="audio/Cdim7.wav" type="audio/wav">
+        </audio><br />
+        <br />
+        (Note that the Major/minor 6th chords treat the diminished 7th interval as a 6th interval, which is why they're called 6th chords.)<br />
+        We can write these 9 types of seventh chords more generally as pitch-set classes:<br />
+        <br />
+        <img src="images/chord-pitch-set.jpg" class="bigger">
+        <br />
+        <br />
+        Finally, we can also write them more compactly as ordered triplets <k, ft, f7>
+    , where k represents the root note
+    (or key), ft is the flavor of the triad, and f7 is the flavor of the seventh.<br />
+    <br />
+    <img src="images/compact-1.jpg" class="bigger">
+    <br />
+    <br />
+    We can do this with notes and words, or, we can map keys to numbers starting with C=0, and map flavors
+    to numbers with major = 0, minor = 1, diminished = 2.<br />
+    <br />
+    <img src="images/compact-2.jpg" class="bigger">
+    <br />
+    <br />
+    <span style="font-weight:bolder; font-size:15px">TRANSFORMATIONS</span> <br />
+    <br />
+    UTTs are transformations applied to triads, to turn them into other triads.
+    I extended the logic of UTTs to my set of seventh chords, to define transformations from one
+    seventh chord to another. These transformations are defined as a 5-tuple: <br />
+    <br />
+    <img src="images/transform.png" class="bigger"><br />
+    <br />
+    Where &sigma;<sup>t</sup> is the “flavor-changer” for the triad, &sigma;<sup>7</sup> is the flavor-changer for the seventh,
+    t<sup>t<sup>+</sup></sup>is the root translation on a major triad, t<sup>t<sup>-</sup></sup> is the root translation on a minor triad,
+    and t<sup>d</sup> is the root
+    translation on a diminished triad.<br />
+    <br />
+    The “flavor-changers” are either + or -, and move the flavor of the triad or the seventh either
+    forward or backwards in this “flavor-cycle”:<br />
+    <br />
+    <img src="images/flavor-cycle.png" class="small"><br />
+    <br />
+    The root translations are in the range [0, 11], and translate the root of the chord depending on the type of the triad.
+    For example, consider the the following transformation operating on the chord CM7:<br />
+    <br />
+    <img src="images/transform-1.jpg" class="transform"><br />
+    <br />
+    The triad flavor-changer makes the triad diminished.<br />
+    <br />
+    <img src="images/transform-2.jpg" class="transform"><br />
+    <br />
+    The seventh flavor-changer makes the seventh minor. <br />
+    <br />
+    <img src="images/transform-3.jpg" class="transform"><br />
+    <br />
+    Since CM7 has a major triad, we take the root translation on a major triad. <br />
+    <br />
+    <img src="images/transform-4.jpg" class="transform"><br />
+    <br />
+    Thus, this transformation operating on the chord CM7 outputs the chord E 1/2 dim 7.<br />
+    <br />
+    Now, let’s get into the two parts of the project proper: composition and notation.<br />
+    <br />
+    <span style="font-weight:bolder; font-size:20px">1. COMPOSITION </span> <br />
+    <br />
+    The composition is determined by the states of the cellular automaton. For each timestep,
+    the corresponding state adds 1) a new chord to the chord progression, 2) a new melody sequence, and 3)
+    a new chord sequence. The chord progression defines the harmonic structure of the composition, and the
+    melody and chord sequences are the actual notes to be played.<br />
+    <br />
+    <img src="images/structure.jpg" class="bigger"><br />
+    <br />
+    These three parts are mapped to the automaton with the same two-step process: one state is used to generate potential
+    components, and then the next state is used to “choose” which of those potential components to use in the composition.<br />
+    <br />
+    <br />
+    <span style="font-weight:bolder; font-size:15px">1.1 CHORD PROGRESSION</span> <br />
+    <br />
+    The chord progression starts with the user’s choice of an initial chord. We’ll call this chord C<sub>0</sub>, and the initial automaton state S<sub>0</sub>.
+    Then, for each alive cell a<sub>0<sub>i</sub></sub> in the state S<sub>0</sub>, I create a possible transformation t<sub>0<sub>i</sub></sub> based on the
+    indices of a<sub>0<sub>i</sub></sub> as follows:<br />
+    <br />
+    <img src="images/cell-transform.jpg" class="bigger"><br />
+    <br />
+    Where F is determined by the list of previously alive cells, as follows: <br />
+    <br />
+    <img src="images/flavor-factor.jpg" class="bigger"><br />
+    <br />
+    So the state S<sub>0</sub> gives me a list L<sub>0</sub> of k<sub>0</sub> possible transformations, one for each alive cell in S<sub>0</sub>.<br />
+    <br />
+    <img src="images/list-transforms.jpg" class="bigger"><br />
+    <br />
+    Then, the automaton gets updated into state S<sub>1</sub>. In this new state, there are k<sub>1</sub> alive cells.<br />
+    The k<sub>1</sub><sup>th</sup> transformation on the list L<sub>0</sub> is applied to the chord C<sub>0</sub> to get the
+    next chord in the progression, C<sub>1</sub>:<br />
+    <br />
+    <img src="images/next-chord.jpg" class="bigger"><br />
+    <br />
+    This process then repeats for each next state of the automaton, and generates the chord progression for the composition.<br />
+    <br />
+    <span style="font-weight:bolder; font-size:15px"> 1.2 MELODY SEQUENCE</span> <br />
+    <br />
+    The melody sequence is built up of ‘note’ structures, which I defined as n = {d, p} where d = duration and p = pitch.
+    I chose the durations to be in the range [1, 16] x 1/16th note. The pitches are chosen from a ‘scale’, based on the chord type:<br />
+    <br />
+    <img src="images/scales.jpg" class="bigger"><br />
+    <br />
+    I somewhat arbitrarily defined these scales to include the 7 notes that sounded best over each chord.You’ll notice that each scale includes
+    the pitch 12, which doesn’t actually exist - I used this to indicate rests. <br>
+    For fun, I have also included the canonical western music theory name for each of these scales, where applicable.<br />
+    Here’s what they look and sound like in the key of C:<br />
+    <br />
+    <img src="images/majorscale.jpg" class="chord-diagram">
+    <audio controls>
+        <source src="audio/majorscale.wav" type="audio/wav">
+    </audio><br />
+    <img src="images/mixolydianscale.jpg" class="chord-diagram">
+    <audio controls>
+        <source src="audio/mixolydianscale.wav" type="audio/wav">
+    </audio><br />
+    <img src="images/lydian.jpg" class="chord-diagram">
+    <audio controls>
+        <source src="audio/lydianscale.wav" type="audio/wav">
+    </audio><br />
+    <br />
+    <img src="images/harmonicminor.jpg" class="chord-diagram">
+    <audio controls>
+        <source src="audio/harmonicminor.wav" type="audio/wav">
+    </audio><br />
+    <img src="images/aeolianscale.jpg" class="chord-diagram">
+    <audio controls>
+        <source src="audio/aeolianscale.wav" type="audio/wav">
+    </audio><br />
+    <img src="images/dorianscale.jpg" class="chord-diagram">
+    <audio controls>
+        <source src="audio/dorianscale.wav" type="audio/wav">
+    </audio><br />
+    <br />
+    <img src="images/dimmajscale.jpg" class="chord-diagram">
+    <audio controls>
+        <source src="audio/dimmajscale.wav" type="audio/wav">
+    </audio><br />
+    <img src="images/locrianscale.jpg" class="chord-diagram">
+    <audio controls>
+        <source src="audio/locrianscale.wav" type="audio/wav">
+    </audio><br />
+    <img src="images/dimscale.jpg" class="chord-diagram">
+    <audio controls>
+        <source src="audio/dimscale.wav" type="audio/wav">
+    </audio><br />
+    <br />
+    From the initial automaton state S<sub>0</sub>, I created a list LN<sub>0</sub> of k<sub>0</sub> possible notes based on the indices
+    of the alive cells a<sub>0<sub>i</sub></sub> as follows:<br />
+    <br />
+    <img src="images/melody-1.jpg" class="bigger"><br />
+    <br />
+    Then, in the next automaton state S_1, I looked at the cells that survived from state S_0 to S_1, and chose their
+    corresponding notes (in order of the list).<br />
+    <br />
+    <img src="images/melody-2.jpg" class="bigger"><br />
+    <br />
+    This process repeats for each new state of the automaton, to generate a melody sequence for each chord in the chord progression.<br />
+    <br />
+    <span style="font-weight:bolder; font-size:15px"> 1.3 CHORD SEQUENCE</span> <br />
+    <br />
+    Finally, I also chose to generate a chord sequence, to make the left-hand part more interesting.
+    Chord sequence ‘notes’ are encoded similarly as n = {d, p} where d = duration in the same range.
+    The possible pitches p now consist of all possible 1, 2,  and 3-note combinations of the four notes within the chord:<br />
+    <br />
+    <img src="images/chord-1.jpg" class="bigger"><br />
+    <br />
+    With [4] indicating a rest.
+    This allows for more interesting arpeggiation and/or partial voicing of the chords in the left hand.<br />
+    The sequence of chord ‘note’ objects is determined exactly the same way as the melody sequence, except that chord
+    ‘notes’ are now mapped to indices as follows:<br />
+    <br />
+    <img src="images/chord-2.jpg" class="bigger"><br />
+    <br />
+    Thus, we have successfully mapped each automaton state to a chord progression, a melody sequence, and a chord sequence.
+    This composition information is the output generated at the bottom of the screen, with durations in parentheses:<br />
+    <br />
+    <img src="images/compinfo.png" class="bigger"><br />
+    <br />
+    However, there is a slight issue: the total duration of each chord sequence doesn’t necessarily match the total
+    duration of it’s accompanying melody sequence. I chose to deal with this problem in the notation step.<br />
+    <br />
+    <br />
+    <span style="font-weight:bolder; font-size:20px">2. NOTATION</span> <br />
+    <br />
+    The notation portion of the project essentially consists of meticulously constructing strings
+    that are readable by the LilyPond music engraver. The baseline code sets up an empty document with a
+    title, composition information, and a blank piano staff:<br />
+    <br />
+    <img src="images/emptysheet.png" class="bigger"><br />
+    <br />
+    (filler notes necessary to make it compile)<br />
+    The key of the composition is set from the key and triad flavor of the initial chord
+    (diminished triads —> minor key). In LilyPond, notes are written by their letter name,
+    and followed by “is” for sharp or “es” for flat. Unfortunately LilyPond is not smart enough
+    to decipher whether an accidental should be notated as a sharp or as a flat, so I hard-coded
+    how each of the 12 tones should be notated in each key, major and minor:<br />
+    <br />
+    <img src="images/scalenotation.png" class="bigger"><br />
+    <br />
+    <i>
+        (This is entirely arbitrary and based on personal taste; if you are very proper and following
+        western theory rules, you’re supposed to make accidentals sharp when the melody trends upwards,
+        and flat when the melody trends downwards, but also sometimes it depends on the chord progression
+        you’re invoking, and also sometimes depends on the chord progression you’re hinting at but not
+        actually using, and so it’s very confusing and arbitrary and it’s easier to just hard-code it
+        based on whether or not I like calling things sharps or flats in particular keys.)
+    </i><br />
+    <br />
+    Durations in LilyPond are as follows:<br />
+    <br />
+    <img src="images/lilypondurations.jpg" class="bigger"><br />
+    <br />
+    One annoying thing with duration notation is that readers of western music are typically used
+    to “friendly” duration notation that makes it as clear as possible where notes fall in
+    relation to beats. For example:<br />
+    <br />
+    <img src="images/measure-example.png" class="bigger"><br />
+    <br />
+    Although these two measures depict the exact same note with the exact same duration,
+    the right version is much more readable, due to the notation that tells you the note takes up
+    the last 16th of the first beat, all of the second and third beat, and the first three 16ths
+    of the last. By contrast, the second version is much harder to read, because it only
+    tells you to wait three 16ths, then play a note lasting three quarter notes, and then rest for one 16th.
+    (It may seem easier to simply count to twelve 16ths than to keep track of the beat and its relation to the note
+    all at once, but it’s actually much easier, rhythmically, to benchmark note durations against beats.)<br />
+    <br />
+    LilyPond will automatically break your notes at measures. However, it doesn’t automatically write “friendly” notation within measures.
+    I handled this problem by
+    checking how each note falls in relation to beats, by looking at totalTime % 4. If it crosses a beat, I broke the note at
+    the crossing point and wrote it with a tie instead.<br />
+    <br />
+    <img src="images/beathandling.png" class="bigger"><br />
+    <br />
+    Finally, to solve the issue of chord sequence timing versus melody sequence timing, I added an
+    extra handler in the parsing of the chord sequence:<br />
+    <br />
+    <img src="images/timehandling.png" class="bigger"><br />
+    <br />
+    This ensures that the chord sequence doesn’t overrun the melody sequence, and also conversely
+    ensures that the last note of the chord sequence stretches to match the length of the melody sequence.<br />
+    <br />
+    <br />
+    <span style="font-weight:bolder; font-size:20px">RECAP</span> <br />
+    <br />
+    The following diagram depicts the structure of this project in a bit more detail:<br />
+    <br />
+    <img src="images/recap.jpg" class="bigger"><br />
+    <br />
+    Thanks for reading this far, and thanks for a great semester!
+    <br />
+</div>
+</body>
+</html>
