@@ -1,4 +1,4 @@
-# Transformative Living: experiments for piano
+# Transformative Living: Experiments for Piano
 
 A deterministic generator of piano compositions using Conway's Game of Life and an custom extended theory of uniform triadic transformations. 
 
